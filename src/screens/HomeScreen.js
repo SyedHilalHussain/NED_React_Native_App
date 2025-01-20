@@ -32,8 +32,8 @@ export default function HomeScreen({ route }) {
   navigation={navigation}
 />
 
-          <GreetingCard navigation={navigation} />
-          <AttendanceRow navigation={navigation} />
+          {/* <GreetingCard navigation={navigation} /> */}
+          {/* <AttendanceRow navigation={navigation} /> */}
         </CurvedBackground>
 
         {/* Gray-Blue Background Section */}
