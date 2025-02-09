@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { styles } from '../Screens/styles';
 const ACTIONS = [
   { id: 1, icon: 'calendar', type: 'Ionicons', label: 'Schedule' },
   { id: 2, icon: 'library', type: 'Ionicons', label: 'Courses' },
@@ -86,47 +86,3 @@ export const QuickActions = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  QuickActionscontainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderColor: 'rgba(46, 176, 134, 0.1)',
-    borderWidth: 1,
-    marginHorizontal: 18,
-    marginVertical:10,
-    marginTop:20,
-    padding: 10,
-    borderRadius: 20,
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-  },
-  QuickActionsbuttonWrapper: {
-    alignItems: 'center',
-    padding: 4,
-  },
-  QuickActionsactionButton: {
-    alignItems: 'center',
-    padding: 12,
-    borderRadius: 16,
-    backgroundColor: 'rgba(46, 176, 134, 0.1)',
-  },
-  QuickActionsselectedButton: {
-    backgroundColor: '#2eb086',
-  },
-  QuickActionsactionText: {
-    color: '#ffffff',
-    marginTop: 8,
-    fontSize: 13,
-    fontWeight: '500',
-  },
-  QuickActionsselectedText: {
-    color: '#ffffff',
-    fontWeight: '600',
-  },
-});

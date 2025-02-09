@@ -14,35 +14,20 @@ import { InternshipCard } from '../Components/InternshipCard';
 import { QuickActions } from '../Components/QuickActions';
 import { ModernEventCard } from '../Components/ModernEventCard';
 import { useNavigation } from '@react-navigation/native';
-// Components
-
-// Enhanced Header Component
-
-
-// Enhanced Progress Card
-
-
-// Enhanced Analytics Card
-
-
-// New Component: Upcoming Deadlines
-
-
-// New Component: Course Schedule
-
+import { styles } from './styles';
 
 
 
 
 const GPACard = ({ currentGPA, lastSemesterGPA }) => (
-  <View style={[styles.card, styles.gpaCard]}>
-    <Text style={styles.cardTitle}>GPA</Text>
-    <Text style={styles.gpaValue}>{currentGPA}</Text>
-    <Text style={styles.gpaSubtext}>Last Semester gpa</Text>
-    <View style={styles.cgpaContainer}>
-      <Text style={styles.cgpaText}>CGPA</Text>
-      <Text style={styles.cgpaValue}>{lastSemesterGPA}</Text>
-      <View style={styles.trendIndicator}>
+  <View style={[styles.StudentDashboardcard, styles.StudentDashboardgpaCard]}>
+    <Text style={styles.StudentDashboardcardTitle}>GPA</Text>
+    <Text style={styles.StudentDashboardgpaValue}>{currentGPA}</Text>
+    <Text style={styles.StudentDashboardgpaSubtext}>Last Semester gpa</Text>
+    <View style={styles.StudentDashboardcgpaContainer}>
+      <Text style={styles.StudentDashboardcgpaText}>CGPA</Text>
+      <Text style={styles.StudentDashboardcgpaValue}>{lastSemesterGPA}</Text>
+      <View style={styles.StudentDashboardtrendIndicator}>
         <Ionicons name="arrow-up" size={16} color="#2eb086" />
       </View>
     </View>
@@ -157,30 +142,132 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
       },
     ];
   
-    // New data for course schedule
+  
     const todaySchedule = [
       {
-        time: '09:00 AM',
-        title: 'Software Engineering',
-        location: 'Room 401',
-        lecturer: 'Dr. Smith'
+        time: "09:00",
+        timeRange: "9:00 - 10:15",
+        title: "Software Engineering",
+        location: "Room 401",
+        lecturer: "Dr. Smith",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
       },
       {
-        time: '11:00 AM',
-        title: 'Database Systems',
-        location: 'Lab 2',
-        lecturer: 'Prof. Johnson'
+        time: "11:00",
+        timeRange: "11:00 - 12:15",
+        title: "Database Systems",
+        location: "Lab 2",
+        lecturer: "Prof. Johnson",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
       },
       {
-        time: '02:00 PM',
-        title: 'Artificial Intelligence',
-        location: 'Room 405',
-        lecturer: 'Dr. Williams'
+        time: "09:00",
+        timeRange: "9:00 - 10:15",
+        title: "Software Engineering",
+        location: "Room 401",
+        lecturer: "Dr. Smith",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
+      },
+      {
+        time: "11:00",
+        timeRange: "11:00 - 12:15",
+        title: "Database Systems",
+        location: "Lab 2",
+        lecturer: "Prof. Johnson",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
+      },
+      {
+        time: "09:00",
+        timeRange: "9:00 - 10:15",
+        title: "Software Engineering",
+        location: "Room 401",
+        lecturer: "Dr. Smith",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
+      },
+      {
+        time: "11:00",
+        timeRange: "11:00 - 12:15",
+        title: "Database Systems",
+        location: "Lab 2",
+        lecturer: "Prof. Johnson",
+        code: "SE001",  // Added for detail page
+        resources: [     // Added for detail page
+          { title: "Lecture Slides", type: "PDF" },
+          { title: "Course Notes", type: "DOC" }
+        ],
+        assignments: [   // Added for detail page
+          { title: "Project Proposal", dueDate: "Jan 29" },
+          { title: "Code Review", dueDate: "Jan 25" }
+        ],
+        learningChecks: [ // Added for detail page
+          "Q1. What are the key principles of software engineering?",
+          "Q2. How do you implement SOLID principles?"
+        ]
       }
     ];
   
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.StudentDashboardcontainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Enhanced Header */}
           <Top userInfo={userInfo} navigation={navigation} />
@@ -188,21 +275,21 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
           {/* Quick Actions */}
           <QuickActions />
           
-          <View style={styles.content}>
+          <View style={styles.StudentDashboardcontent}>
               {/* Events Section */}
 
-              <View style={styles.eventSection}>
-              <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Events</Text>
+              <View style={styles.StudentDashboardeventSection}>
+              <View style={styles.StudentDashboardsectionHeader}>
+                <Text style={styles.StudentDashboardsectionTitle}>Events</Text>
                 <TouchableOpacity>
-                  <Text style={styles.seeMoreText}>See more</Text>
+                  <Text style={styles.StudentDashboardseeMoreText}>See more</Text>
                 </TouchableOpacity>
               </View>
               <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false}
-        style={styles.scrollContainer}
-        contentContainerStyle={styles.eventScrollContent}
+        style={styles.StudentDashboardscrollContainer}
+        contentContainerStyle={styles.StudentDashboardeventScrollContent}
       >
         {modernEvents.map((event, index) => (
           <ModernEventCard key={index} {...event} />
@@ -210,7 +297,7 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
       </ScrollView>
             </View>
             {/* Progress Section */}
-            <View style={styles.progressSection}>
+            <View style={styles.StudentDashboardprogressSection}>
               <ProgressCard
                 title="Attendance"
                 value={75}
@@ -229,7 +316,7 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
             </View>
   
             {/* Analytics Section */}
-            <View style={styles.analyticsSection}>
+            <View style={styles.StudentDashboardanalyticsSection}>
               <AnalyticsCard
                 title="CGPA Progress"
                 data={cgpaData}
@@ -249,14 +336,14 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
             <DeadlinesSection deadlines={deadlines} />
   
             {/* New Course Schedule Section */}
-            <CourseSchedule schedule={todaySchedule} />
+            <CourseSchedule schedule={todaySchedule} navigation={navigation} />
   
             {/* Internship Section */}
-            <View style={styles.newsSection}>
-              <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Internship Opportunities</Text>
+            <View style={styles.StudentDashboardnewsSection}>
+              <View style={styles.StudentDashboardsectionHeader}>
+                <Text style={styles.StudentDashboardsectionTitle}>Internship Opportunities</Text>
                 <TouchableOpacity>
-                  <Text style={styles.seeMoreText}>See all</Text>
+                  <Text style={styles.StudentDashboardseeMoreText}>See all</Text>
                 </TouchableOpacity>
               </View>
               {internships.map((internship, index) => (
@@ -271,75 +358,5 @@ const GPACard = ({ currentGPA, lastSemesterGPA }) => (
     );
   };
 
-  const styles = StyleSheet.create({
-    daysContainer: {
-      flexDirection: 'row',
-      paddingHorizontal: 16,
-    },
-    container: {
-      flex: 1,
-      backgroundColor: '#121212',
-    },
-    content: {
-      padding: 16,
-    },
-    progressSection: {
-      marginTop: -30, // Overlap with header for modern look
-    },
-    analyticsSection: {
-      marginTop: 20,
-    },
-    sectionHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 16,
-      
-    },
-    sectionTitle: {
-      color: '#ffffff',
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
   
-   
-   
-    eventSection: {
-      marginBottom: 30,
-      height: 280, // Adjust this value based on your card height
-    },
-    
-    scrollContainer: {
-      flexGrow: 0,
-    },
-    
-    eventScrollContent: {
-      paddingHorizontal: 16,
-      gap: 16, // Space between cards
-      flexDirection: 'row',
-    },
-   
-  
-  
-   
-    
-
-  
-   
-    seeMoreText: {
-      color: '#2eb086',
-      fontSize: 14,
-    },
-  
- 
-   
-    
-   
- 
- 
-  
-  
-
-  
-  });
 export default StudentDashboard;

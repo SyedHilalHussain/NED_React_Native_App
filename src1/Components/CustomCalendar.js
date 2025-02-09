@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { BlurView } from "expo-blur";
 import { Ionicons } from "@expo/vector-icons";
-
+import { styles } from "../Screens/styles";
 const { width } = Dimensions.get("window");
 
 const CustomCalendar = ({ onClose, onSelectDate }) => {
@@ -76,7 +76,7 @@ const CustomCalendar = ({ onClose, onSelectDate }) => {
     // Render week days
     daysInWeek.forEach((day) => {
       days.push(
-        <Text key={`weekday-${day}`} style={styles.weekDayText}>
+        <Text key={`weekday-${day}`} style={styles.CustomCalendarweekDayText}>
           {day}
         </Text>
       );
@@ -84,7 +84,7 @@ const CustomCalendar = ({ onClose, onSelectDate }) => {
 
     // Add empty spaces for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-      days.push(<View key={`empty-${i}`} style={styles.dayButton} />);
+      days.push(<View key={`empty-${i}`} style={styles.CustomCalendardayButton} />);
     }
 
     // Render month days
@@ -98,17 +98,17 @@ const CustomCalendar = ({ onClose, onSelectDate }) => {
         <TouchableOpacity
           key={`day-${i}`}
           style={[
-            styles.dayButton,
-            isToday && styles.todayButton,
-            isSelectedDate(i) && styles.selectedDay,
+            styles.CustomCalendardayButton,
+            isToday && styles.CustomCalendartodayButton,
+            isSelectedDate(i) && styles.CustomCalendarselectedDay,
           ]}
           onPress={() => handleDateSelect(i)}
         >
           <Text
             style={[
-              styles.dayText,
-              isToday && styles.todayText,
-              isSelectedDate(i) && styles.selectedDayText,
+              styles.CustomCalendardayText,
+              isToday && styles.CustomCalendartodayText,
+              isSelectedDate(i) && styles.CustomCalendarselectedDayText,
             ]}
           >
             {i}
@@ -119,7 +119,7 @@ const CustomCalendar = ({ onClose, onSelectDate }) => {
 
     // Fill remaining spaces in the last row (6x7 grid)
     while (days.length % 7 !== 0) {
-      days.push(<View key={`empty-tail-${days.length}`} style={styles.dayButton} />);
+      days.push(<View key={`empty-tail-${days.length}`} style={styles.CustomCalendardayButton} />);
     }
 
     return days;
@@ -129,104 +129,31 @@ const CustomCalendar = ({ onClose, onSelectDate }) => {
 
   return (
     <TouchableOpacity
-      style={styles.overlay}
+      style={styles.CustomCalendaroverlay}
       activeOpacity={1}
       onPress={onClose}
     >
-      <BlurView intensity={20} tint="dark" style={styles.calendarContainer}>
+      <BlurView intensity={20} tint="dark" style={styles.CustomCalendarcalendarContainer}>
         <TouchableOpacity activeOpacity={1} onPress={(e) => e.stopPropagation()}>
           {/* Header */}
-          <View style={styles.header}>
+          <View style={styles.CustomCalendarheader}>
             <TouchableOpacity onPress={goToPreviousMonth}>
               <Ionicons name="chevron-back" size={24} color="#fff" />
             </TouchableOpacity>
-            <Text style={styles.monthYearText}>{monthYear}</Text>
+            <Text style={styles.CustomCalendarmonthYearText}>{monthYear}</Text>
             <TouchableOpacity onPress={goToNextMonth}>
               <Ionicons name="chevron-forward" size={24} color="#fff" />
             </TouchableOpacity>
           </View>
 
           {/* Calendar */}
-          <View style={styles.weekDaysContainer}>{renderCalendarDays()}</View>
+          <View style={styles.CustomCalendarweekDaysContainer}>{renderCalendarDays()}</View>
         </TouchableOpacity>
       </BlurView>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  calendarContainer: {
-    width: width - 40,
-    padding: 20,
-    borderRadius: 20,
-    backgroundColor: "rgba(30, 41, 59, 0.7)",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  monthYearText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  weekDaysContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  weekDayText: {
-    width: "14.28%",
-    textAlign: "center",
-    color: "#94a3b8",
-    fontSize: 12,
-    fontWeight: "600",
-    marginBottom: 10,
-  },
-  dayButton: {
-    width: "14.28%",
-    aspectRatio: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    
-  },
-  dayText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-  todayButton: {
-    backgroundColor: "#007AFF",
-    borderRadius: 20,
-    
-  },
-  todayText: {
-    color: "#fff",
-    fontWeight: "600",
-    padding: 10,
-  },
-  selectedDay: {
-    backgroundColor: "#007AFF",
-    borderRadius: (width - 80) / 14,
-  },
-  selectedDayText: {
-    color: "#fff",
-    fontWeight: "600",
-  },
-});
+
 
 export default CustomCalendar;

@@ -7,7 +7,7 @@ import Svg, { Path, Circle, Line, Text as SvgText } from 'react-native-svg';
 import { Ionicons } from '@expo/vector-icons';
 import CustomCalendar from '../Components/CustomCalendar';
 import HeaderBackground from '../Components/HeaderBackground ';
-
+import { styles } from './styles';
 const { width, height } = Dimensions.get('window');
 const DateStrip = ({ onCalendarPress }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -54,15 +54,15 @@ const DateStrip = ({ onCalendarPress }) => {
     };
   
     return (
-      <BlurView intensity={40} tint="dark" style={styles.datescontainer}>
-        <View style={styles.headerRow}>
-          <View style={styles.calendarRow}>
+      <BlurView intensity={40} tint="dark" style={styles.AttendancePagedatescontainer}>
+        <View style={styles.AttendancePageheaderRow}>
+          <View style={styles.AttendancePagecalendarRow}>
             <TouchableOpacity onPress={onCalendarPress}>
-              <Ionicons name="calendar-outline" size={24} color="#fff" style={styles.calendarIcon} />
+              <Ionicons name="calendar-outline" size={24} color="#fff" style={styles.AttendancePagecalendarIcon} />
             </TouchableOpacity>
-            <Text style={styles.monthYearText}>{getMonthYearString(currentDate)}</Text>
+            <Text style={styles.AttendancePagemonthYearText}>{getMonthYearString(currentDate)}</Text>
           </View>
-          <View style={styles.navigationButtons}>
+          <View style={styles.AttendancePagenavigationButtons}>
             <TouchableOpacity onPress={goToPreviousMonth}>
               <Ionicons name="chevron-back" size={24} color="#fff" />
             </TouchableOpacity>
@@ -74,20 +74,20 @@ const DateStrip = ({ onCalendarPress }) => {
         <ScrollView 
           horizontal 
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.daysContainer}
+          contentContainerStyle={styles.AttendancePagedaysContainer}
         >
           {getDatesForWeek().map((date, index) => {
             const isToday = date.toDateString() === new Date().toDateString();
             return (
               <TouchableOpacity
                 key={index}
-                style={styles.dayColumn}
+                style={styles.AttendancePagedayColumn}
               >
-                <Text style={[styles.dayText, isToday && styles.todayDayText]}>
+                <Text style={[styles.AttendancePagedayText, isToday && styles.AttendancePagetodayDayText]}>
                   {getDayName(date)}
                 </Text>
-                <View style={[styles.dateContainer, isToday && styles.todayDateContainer]}>
-                  <Text style={[styles.dateText, isToday && styles.todayDateText]}>
+                <View style={[styles.AttendancePagedateContainer, isToday && styles.AttendancePagetodayDateContainer]}>
+                  <Text style={[styles.AttendancePagedateText, isToday && styles.AttendancePagetodayDateText]}>
                     {date.getDate()}
                   </Text>
                 </View>
@@ -99,22 +99,22 @@ const DateStrip = ({ onCalendarPress }) => {
     );
   };
 const CourseAttendanceCard = ({ course }) => (
-  <BlurView intensity={20} tint="dark" style={styles.courseCard}>
-    <View style={styles.courseHeader}>
-      <Text style={styles.courseTitle}>{course.name}</Text>
-      <View style={styles.attendanceTag}>
-        <Text style={styles.attendancePercentage}>{course.attendance}%</Text>
+  <BlurView intensity={20} tint="dark" style={styles.AttendancePagecourseCard}>
+    <View style={styles.AttendancePagecourseHeader}>
+      <Text style={styles.AttendancePagecourseTitle}>{course.name}</Text>
+      <View style={styles.AttendancePageattendanceTag}>
+        <Text style={styles.AttendancePageattendancePercentage}>{course.attendance}%</Text>
       </View>
     </View>
     
-    <View style={styles.attendanceDetails}>
-      <Text style={styles.attendanceText}>
+    <View style={styles.AttendancePageattendanceDetails}>
+      <Text style={styles.AttendancePageattendanceText}>
         Classes Attended: {course.attended}/{course.total}
       </Text>
-      <View style={styles.progressBar}>
+      <View style={styles.AttendancePageprogressBar}>
         <View 
           style={[
-            styles.progressFill, 
+            styles.AttendancePageprogressFill, 
             { 
               width: `${course.attendance}%`,
               backgroundColor: course.attendance >= 75 ? '#2EB086' : '#ff4444'
@@ -124,7 +124,7 @@ const CourseAttendanceCard = ({ course }) => (
       </View>
     </View>
     
-    <Text style={styles.lastUpdate}>
+    <Text style={styles.AttendancePagelastUpdate}>
       Last attended: {course.lastAttended}
     </Text>
   </BlurView>
@@ -154,13 +154,13 @@ const AttendanceGraph = ({ data }) => {
   };
 
   return (
-    <BlurView intensity={20} tint="dark" style={styles.graphCard}>
-      <View style={styles.graphHeader}>
-        <View style={styles.graphTitleContainer}>
-          <View style={styles.graphIcon}>
+    <BlurView intensity={20} tint="dark" style={styles.AttendancePagegraphCard}>
+      <View style={styles.AttendancePagegraphHeader}>
+        <View style={styles.AttendancePagegraphTitleContainer}>
+          <View style={styles.AttendancePagegraphIcon}>
             <Ionicons name="time-outline" size={20} color="#2EB086" />
           </View>
-          <Text style={styles.graphTitle}>Attendance Trend</Text>
+          <Text style={styles.AttendancePagegraphTitle}>Attendance Trend</Text>
         </View>
         <TouchableOpacity>
           <Ionicons name="ellipsis-vertical" size={20} color="#fff" />
@@ -227,18 +227,18 @@ const AttendanceGraph = ({ data }) => {
 };
 
 const SubjectProgressBar = ({ subject, percentage }) => (
-  <BlurView intensity={20} tint="dark" style={styles.progressCard}>
-    <Text style={styles.subjectName}>{subject}</Text>
-    <View style={styles.progressWrapper}>
-      <View style={styles.progressBackground}>
+  <BlurView intensity={20} tint="dark" style={styles.AttendancePageprogressCard}>
+    <Text style={styles.AttendancePagesubjectName}>{subject}</Text>
+    <View style={styles.AttendancePageprogressWrapper}>
+      <View style={styles.AttendancePageprogressBackground}>
         <View 
           style={[
-            styles.progressFill,
+            styles.AttendancePageprogressFill,
             { width: `${percentage}%` }
           ]} 
         />
       </View>
-      <Text style={styles.progressText}>{percentage}%</Text>
+      <Text style={styles.AttendancePageprogressText}>{percentage}%</Text>
     </View>
   </BlurView>
 );
@@ -295,43 +295,43 @@ const AttendancePage = () => {
     values: [55, 40, 80, 30, 70, 48, 65]
   };
   return (
-    <View style={styles.attendancecontainer}>
+    <View style={styles.AttendancePageattendancecontainer}>
          <ScrollView 
-        style={styles.contentContainer}
-        contentContainerStyle={styles.contentWrapper}
+        style={styles.AttendancePagecontentContainer}
+        contentContainerStyle={styles.AttendancePagecontentWrapper}
       >
       <HeaderBackground />
       
-      <View style={styles.topContainer}>
-        <BlurView intensity={20} tint="dark" style={styles.toggleContainer}>
+      <View style={styles.AttendancePagetopContainer}>
+        <BlurView intensity={20} tint="dark" style={styles.AttendancePagetoggleContainer}>
           <TouchableOpacity 
-            style={[styles.toggleButton, activeTab === 'classes' && styles.activeToggle]}
+            style={[styles.AttendancePagetoggleButton, activeTab === 'classes' && styles.AttendancePageactiveToggle]}
             onPress={() => setActiveTab('classes')}
           >
-            <Text style={[styles.toggleText, activeTab === 'classes' && styles.activeToggleText]}>
+            <Text style={[styles.AttendancePagetoggleText, activeTab === 'classes' && styles.AttendancePageactiveToggleText]}>
               CLASSES
             </Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
-            style={[styles.toggleButton, activeTab === 'analytics' && styles.activeToggle]}
+            style={[styles.AttendancePagetoggleButton, activeTab === 'analytics' && styles.AttendancePageactiveToggle]}
             onPress={() => setActiveTab('analytics')}
           >
-            <Text style={[styles.toggleText, activeTab === 'analytics' && styles.activeToggleText]}>
+            <Text style={[styles.AttendancePagetoggleText, activeTab === 'analytics' && styles.AttendancePageactiveToggleText]}>
               ANALYTICS
             </Text>
           </TouchableOpacity>
         </BlurView>
         
                 <TouchableOpacity 
-                  style={styles.calendarToggle}
+                  style={styles.AttendancePagecalendarToggle}
                   onPress={toggleDateStrip}
                 >
-                  <View style={styles.toggleLine} />
+                  <View style={styles.AttendancePagetoggleLine} />
                 </TouchableOpacity>
              
         
-              <Animated.View style={[styles.dateStripWrapper]}>
+              <Animated.View style={[styles.AttendancePagedateStripWrapper]}>
                 {showDateStrip && (
                   <DateStrip onCalendarPress={() => setShowCalendar(true)} />
                 )}
@@ -340,15 +340,15 @@ const AttendancePage = () => {
 
    
       {activeTab === 'classes' ? (
-          <View style={styles.coursesContainer}>
+          <View style={styles.AttendancePagecoursesContainer}>
             {courses.map((course, index) => (
               <CourseAttendanceCard key={index} course={course} />
             ))}
           </View>
         ) : (
-          <View style={styles.analyticsContainer}>
+          <View style={styles.AttendancePageanalyticsContainer}>
             <AttendanceGraph data={trendData} />
-            <View style={styles.progressBarsContainer}>
+            <View style={styles.AttendancePageprogressBarsContainer}>
               {courses.map((course, index) => (
                 <SubjectProgressBar
                   key={index}
@@ -373,374 +373,6 @@ const AttendancePage = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  attendancecontainer: {
-    flex: 1,
-    backgroundColor: '#0f172a',
-    
-  },
-  topContainer: {
-    position: 'absolute',
-    top: 50,
-    left: 0,
-    right: 0,
-    zIndex: 2,
-  },
-  toggleContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    borderRadius: 25,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  activeToggle: {
-    backgroundColor: '#2EB086',
-  },
-  toggleText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-    opacity: 0.7,
-  },
-  activeToggleText: {
-    opacity: 1,
-  },
-  
-  
-  coursesContainer: {
-    gap: 15,
-    paddingTop:300,
-    marginHorizontal:20,
-    marginVertical: '10%',
-    
-    
-  },
-  courseCard: {
-    padding: 15,
-    borderRadius: 15,
-    overflow: 'hidden',
-   
-    borderWidth: 1,
-    borderColor: 'rgba(46, 176, 134, 0.1)',
-    
-  },
-  courseHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  courseTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  attendanceTag: {
-    backgroundColor: 'rgba(46, 176, 134, 0.2)',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 12,
-  },
-  attendancePercentage: {
-    color: '#2EB086',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  attendanceDetails: {
-    marginBottom: 10,
-  },
-  attendanceText: {
-    color: '#fff',
-    opacity: 0.8,
-    marginBottom: 8,
-  },
-  progressBar: {
-    height: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 3,
-  },
-  progressFill: {
-    height: '100%',
-    borderRadius: 3,
-  },
-  lastUpdate: {
-    color: '#fff',
-    opacity: 0.6,
-    fontSize: 12,
-  },
-  analyticsContainer: {
-    gap: 20,
-  },
-  chartContainer: {
-    marginBottom: 20,
-  },
-  chart: {
-    borderRadius: 16,
-  },
-  subjectProgress: {
-    gap: 15,
-  },
-  progressItem: {
-    marginBottom: 15,
-  },
-  progressItemText: {
-    color: '#fff',
-    marginBottom: 8,
-  },
-  progressBarContainer: {
-    height: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12.5,
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  progressBarAnalytics: {
-    height: '100%',
-    backgroundColor: '#2EB086',
-    borderRadius: 12.5,
-  },
-  progressPercentage: {
-    position: 'absolute',
-    right: 10,
-    color: '#fff',
-    fontSize: 12,
-    lineHeight: 25,
-  },
 
-  calendarToggle: {
-    alignItems: "center",
-    paddingVertical: 15,
-    marginTop: 10,
-  },
-  toggleLine: {
-    width: 60,
-    height: 4,
-    backgroundColor: "rgba(250, 249, 249, 0.59)",
-    borderRadius: 2,
-  },
-  headerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    marginBottom: 15,
-  },
-  calendarRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  calendarIcon: {
-    marginRight: 8,
-  },
-  monthYearText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "500",
-  },
-  navigationButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-  },
-  daysContainer: {
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  dayColumn: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 20,
-    minWidth: 60,
-  },
-  dayText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "500",
-    marginBottom: 8,
-    opacity: 0.7,
-  },
-  todayDayText: {
-    opacity: 1,
-  },
-  dateContainer: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  todayDateContainer: {
-    // backgroundColor: '#007AFF',
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "#007AFF",
-  },
-  dateText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "600",
-  },
-  todayDateText: {
-    color: "#fff",
-  },
-  // Calendar specific styles
-  calendarOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  calendarModal: {
-    width: width - 40,
-    padding: 20,
-    borderRadius: 20,
-    backgroundColor: "rgba(30, 41, 59, 0.7)",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  calendarHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  monthYearText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  weekDaysRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 10,
-  },
-  weekDayText: {
-    color: "#94a3b8",
-    fontSize: 12,
-    fontWeight: "600",
-    width: (width - 80) / 7,
-    textAlign: "center",
-  },
-  daysGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  dayButton: {
-    width: (width - 80) / 7,
-    height: (width - 80) / 7,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  selectedDay: {
-    backgroundColor: "#007AFF",
-    borderRadius: (width - 80) / 14,
-  },
-  dayText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-  selectedDayText: {
-    color: "#fff",
-    fontWeight: "600",
-  },
-  emptyDay: {
-    color: "transparent",
-  },
-  datescontainer: {
-    paddingVertical: 10,
-    marginHorizontal: 10,
-    borderRadius: 15,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(46, 176, 134, 0.1)",
-    // backgroundColor: 'rgba(255, 255, 255, 0.5)',
-  },
-  graphCard: {
-    borderRadius: 20,
-    padding: 20,
-    marginTop:'90%',
-    marginHorizontal:20,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(46, 176, 134, 0.1)',
-    backgroundColor: 'rgba(15, 23, 42, 0.7)',
-  },
-  graphHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  graphTitleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  graphIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(46, 176, 134, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10,
-  },
-  graphTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  progressCard: {
-    borderRadius: 15,
-    padding: 15,
-    marginHorizontal:20,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(46, 176, 134, 0.1)',
-    backgroundColor: 'rgba(15, 23, 42, 0.7)',
-  },
-  progressWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  progressBackground: {
-    flex: 1,
-    height: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 4,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#2EB086',
-    borderRadius: 4,
-  },
-  subjectName: {
-    color: '#fff',
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  progressText: {
-    color: '#fff',
-    fontSize: 14,
-    opacity: 0.8,
-    width: 45,
-    textAlign: 'right',
-  },
-  progressBarsContainer: {
-    gap: 10,}
-});
 
 export default AttendancePage;

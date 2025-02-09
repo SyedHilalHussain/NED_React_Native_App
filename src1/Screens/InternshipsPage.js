@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { InternshipHeader } from "../Components/InternshipHeader";
-import DateStrip from "../Components/DateStrip";
+
 import { InternshipCard } from "../Components/InternshipCard";
+import { styles } from "./styles";
 
 const InternshipsPage = ({navigation}) => {
     const userInfo = {
@@ -47,7 +48,7 @@ const InternshipsPage = ({navigation}) => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={styles.InternshipsPagecontainer}>
        <InternshipHeader 
         userInfo={userInfo}
         navigation={navigation}
@@ -58,10 +59,10 @@ const InternshipsPage = ({navigation}) => {
      
 
       <ScrollView
-        style={styles.internshipsContainer}
-        contentContainerStyle={styles.internshipsContent}
+        style={styles.InternshipsPageinternshipsContainer}
+        contentContainerStyle={styles.InternshipsPageinternshipsContent}
       >
-        <View style={styles.internshipsList}>
+        <View style={styles.InternshipsPageinternshipsList}>
           {internships.map((internship, index) => (
             <InternshipCard key={index} {...internship} />
           ))}
@@ -71,66 +72,6 @@ const InternshipsPage = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#121212",
-  },
 
-  dateStripWrapper: {
-    position: "absolute",
-    top: 150,
-    left: 0,
-    right: 0,
-    zIndex: 2,
-    overflow: "hidden",
-  },
-  toggleContainer: {
-    flexDirection: "row",
-    marginHorizontal: 20,
-    borderRadius: 25,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  activeToggle: {
-    backgroundColor: "#2EB086",
-  },
-  toggleText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
-    opacity: 0.7,
-  },
-  activeToggleText: {
-    opacity: 1,
-  },
-  calendarToggle: {
-    alignItems: "center",
-    paddingVertical: 15,
-    marginTop: 10,
-  },
-  toggleLine: {
-    width: 40,
-    height: 4,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    borderRadius: 2,
-  },
-  internshipsContainer: {
-    flex: 1,
-    marginTop: 50,
-  },
-  internshipsContent: {
-    paddingTop: 20,
-  },
-  internshipsList: {
-    marginHorizontal: 15,
-  },
-});
 
 export default InternshipsPage;

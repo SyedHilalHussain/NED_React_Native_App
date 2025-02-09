@@ -1,131 +1,101 @@
 import React from 'react';
-import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
-
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { styles } from '../Screens/styles';
 
+export const CourseSchedule = ({ schedule,navigation  }) => {
+  // Create animated values for each card
+  const fadeAnims = React.useRef(
+    schedule.map(() => new Animated.Value(0))
+  ).current;
 
+  React.useEffect(() => {
+    // Stagger animation for each card
+    Animated.stagger(150, 
+      fadeAnims.map(anim => 
+        Animated.spring(anim, {
+          toValue: 1,
+          useNativeDriver: true,
+          friction: 8,
+          tension: 40
+        })
+      )
+    ).start();
+  }, []);
 
-export const CourseSchedule = ({ schedule }) => (
-    <View style={styles.scheduleSection}>
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Today's Schedule</Text>
-        <TouchableOpacity>
-          <Text style={styles.seeMoreText}>Full Schedule</Text>
-        </TouchableOpacity>
-      </View>
+  return (
+    <View style={styles.CourseSchedulescheduleSection}>
       {schedule.map((course, index) => (
-        <View key={index} style={styles.scheduleCard}>
-          <View style={styles.scheduleTime}>
-            <Text style={styles.timeText}>{course.time}</Text>
-            <View style={styles.timelineDot} />
-            {index !== schedule.length - 1 && <View style={styles.timelineLine} />}
+        <Animated.View 
+          key={index}
+          style={[
+            styles.CourseSchedulescheduleCard,
+            {
+              opacity: fadeAnims[index],
+              transform: [{
+                translateY: fadeAnims[index].interpolate({
+                  inputRange: [0, 2],
+                  outputRange: [50, 0]
+                })
+              }]
+            }
+          ]}
+        >
+          <View style={styles.CourseSchedulescheduleTime}>  
+            <Text style={styles.CourseScheduletimeText}>{course.time}</Text>
+            <View style={styles.CourseScheduletimelineDot} />
+            {index !== schedule.length - 1 && <View style={styles.CourseScheduletimelineLine} />}
           </View>
-          <View style={styles.courseInfo}>
-            <Text style={styles.courseTitle}>{course.title}</Text>
-            <View style={styles.courseDetails}>
-              <View style={styles.courseLocation}>
-                <Ionicons name="location-outline" size={16} color="#888888" />
-                <Text style={styles.locationText}>{course.location}</Text>
+          <TouchableOpacity style={styles.CourseSchedulecourseInfo} activeOpacity={0.7}  onPress={() => {
+  // Add a small scale animation
+  Animated.sequence([
+    Animated.spring(fadeAnims[index], {
+      toValue: 0.95,
+      useNativeDriver: true,
+      friction: 8,
+      tension: 40
+    }),
+    Animated.spring(fadeAnims[index], {
+      toValue: 1,
+      useNativeDriver: true,
+      friction: 8,
+      tension: 40
+    })
+  ]).start(() => {
+    navigation.navigate('DetailSchedulePage', { course });
+  });
+}}
+     >
+            <View style={styles.CourseScheduleheaderSection}>
+              <View style={styles.CourseScheduletitleContainer}>
+                <Text style={styles.CourseSchedulecourseTitle}>{course.title}</Text>
+                <View style={styles.CourseScheduletimeRangePill}>
+                  <Ionicons name="time-outline" size={14} color="#2eb086" />
+                  <Text style={styles.CourseScheduletimeRangeText}>{course.time}</Text>
+                </View>
               </View>
-              <View style={styles.courseLecturer}>
-                <Ionicons name="person-outline" size={16} color="#888888" />
-                <Text style={styles.lecturerText}>{course.lecturer}</Text>
+              <View style={styles.CourseSchedulearrowContainer}>
+                <Ionicons name="chevron-forward" size={24} color="#2eb086" />
               </View>
             </View>
-          </View>
-        </View>
+            <View style={styles.CourseScheduledivider} />
+            <View style={styles.CourseSchedulecourseDetails}>
+              <View style={styles.CourseScheduledetailItem}>
+                <Ionicons name="location-outline" size={20} color="#2eb086" />
+                <Text style={styles.CourseScheduledetailText}>{course.location}</Text>
+              </View>
+              <View style={styles.CourseScheduledetailItem}>
+                <Ionicons name="person-outline" size={20} color="#2eb086" />
+                <Text style={styles.CourseScheduledetailText}>{course.lecturer}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </Animated.View>
       ))}
     </View>
   );
+};
 
-  const styles = StyleSheet.create({ 
 
-    sectionHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 16,
-        marginTop: 24,
-      },
-      sectionTitle: {
-        color: '#ffffff',
-        fontSize: 20,
-        fontWeight: 'bold',
-      },
-      seeMoreText: {
-        color: '#2eb086',
-        fontSize: 14,
-      },
-    scheduleSection: {
-        marginTop: 25,
-        marginBottom: 15,
-      },
-      scheduleCard: {
-        flexDirection: 'row',
-        marginBottom: 25,
-        paddingLeft: 15,
-      },
-      scheduleTime: {
-        width: 85,
-        alignItems: 'flex-start',
-      },
-      timeText: {
-        color: '#2eb086',
-        fontSize: 14,
-        fontWeight: '600',
-        marginBottom: 8,
-      },
-      timelineDot: {
-        width: 12,
-        height: 12,
-        borderRadius: 6,
-        backgroundColor: '#2eb086',
-        marginLeft: 4,
-      },
-      timelineLine: {
-        width: 2,
-        height: '100%',
-        backgroundColor: 'rgba(46, 176, 134, 0.2)',
-        position: 'absolute',
-        top: 20,
-        left: 10,
-      },
-      courseInfo: {
-        flex: 1,
-        backgroundColor: '#1E1E1E',
-        borderRadius: 16,
-        padding: 16,
-        marginLeft: 15,
-        borderWidth: 1,
-        borderColor: 'rgba(46, 176, 134, 0.1)',
-      },
-      courseTitle: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: '600',
-        marginBottom: 10,
-      },
-      courseDetails: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      },
-      courseLocation: {
-        flexDirection: 'row',
-        alignItems: 'center',
-      },
-      courseLecturer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-      },
-      locationText: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: 14,
-        marginLeft: 6,
-      },
-      lecturerText: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: 14,
-        marginLeft: 6,
-      },
 
-  });
+export default CourseSchedule;

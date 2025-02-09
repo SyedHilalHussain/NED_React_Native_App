@@ -14,7 +14,7 @@ import HeaderBackground from "../Components/HeaderBackground ";
 import CustomCalendar from "../Components/CustomCalendar";
 import { ModernEventCard } from "../Components/ModernEventCard";
 import  DateStrip  from "../Components/DateStrip";
-
+import { styles } from "./styles";
 
 const { width, height } = Dimensions.get("window");
 
@@ -153,74 +153,5 @@ const EventsPage = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  EventsPagecontainer: {
-    flex: 1,
-    backgroundColor: "#0f172a",
-  },
-  EventsPagetopContainer: {
-    position: "absolute",
-    top: 50,
-    left: 0,
-    right: 0,
-    zIndex: 2,
-  },
-  EventsPagedateStripWrapper: {
-    position: "absolute",
-    top: 150, // Adjust based on your topContainer height
-    left: 0,
-    right: 0,
-    zIndex: 2,
-    overflow: "hidden",
-  },
-  EventsPagetoggleContainer: {
-    flexDirection: "row",
-    marginHorizontal: 20,
-    borderRadius: 25,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.1)",
-  },
-  EventsPagetoggleButton: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  EventsPageactiveToggle: {
-    backgroundColor: "#2EB086",
-  },
-  EventsPagetoggleText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
-    opacity: 0.7,
-  },
-  EventsPageactiveToggleText: {
-    opacity: 1,
-  },
-  EventsPagecalendarToggle: {
-    alignItems: "center",
-    paddingVertical: 15,
-    marginTop: 10,
-  },
-  EventsPagetoggleLine: {
-    width: 40,
-    height: 4,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    borderRadius: 2,
-  },
-  EventsPageeventsContainer: {
-    flex: 1,
-    marginTop: 320, // Should match the top position of dateStripWrapper
-  },
-  EventsPageeventsContent: {
-    paddingTop: 20,
-  },
-  EventsPageeventsevent: {
-    marginHorizontal: 15,
-  },
-
-});
 
 export default EventsPage;

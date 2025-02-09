@@ -11,15 +11,16 @@ import {
 import { MaterialIcons, FontAwesome5, Feather } from "@expo/vector-icons";
 
 import { LineChart } from "react-native-chart-kit";
+import { styles } from "../Screens/styles";
 
 export const AnalyticsCard = ({ title, data, labels, icon }) => (
-  <View style={styles.analyticsCard}>
-    <View style={styles.analyticsHeader}>
-      <View style={styles.analyticsTitleContainer}>
-        <View style={styles.analyticsIcon}>{icon}</View>
-        <Text style={styles.analyticsTitle}>{title}</Text>
+  <View style={styles.AnalyticsCardanalyticsCard}>
+    <View style={styles.AnalyticsCardanalyticsHeader}>
+      <View style={styles.AnalyticsCardanalyticsTitleContainer}>
+        <View style={styles.AnalyticsCardanalyticsIcon}>{icon}</View>
+        <Text style={styles.AnalyticsCardanalyticsTitle}>{title}</Text>
       </View>
-      <TouchableOpacity style={styles.analyticsMoreButton}>
+      <TouchableOpacity style={styles.AnalyticsCardanalyticsMoreButton}>
         <Feather name="more-vertical" size={20} color="#ffffff" />
       </TouchableOpacity>
     </View>
@@ -71,51 +72,10 @@ export const AnalyticsCard = ({ title, data, labels, icon }) => (
     formatYLabel: () => '',
       }}
       bezier
-      style={styles.analyticsChart}
+      style={styles.AnalyticsCardanalyticsChart}
     
           
     />
   </View>
 );
 
-const styles = StyleSheet.create({
-  analyticsCard: {
-    backgroundColor: "#1e1e1e",
-    borderRadius: 16,
-    padding: 15,
-    marginBottom: 15,
-  },
-  analyticsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 15,
-  },
-  analyticsTitleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  analyticsIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "rgba(46, 176, 134, 0.2)",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 10,
-  },
-  analyticsTitle: {
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  analyticsChart: {
-    backgroundColor: '#1e1e1e',
-    marginLeft:-10,
-    borderRadius: 16,
-    padding: 0,
-    marginBottom: 15,
-    paddingLeft: -200,  // Add this
-    overflow: 'hidden',  // Add thi
-  },
-});
